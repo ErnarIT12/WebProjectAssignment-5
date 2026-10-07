@@ -1,98 +1,226 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#111111">
-    <title>Contact GYMZONE</title>
-    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<a class="skip-link" href="#main-content">Skip to main content</a>
-<header id="main-header"><nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation"><div class="container"><a class="navbar-brand" href="index.html">GYMZONE</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="mainNavbar"><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link" href="index.html">Home</a></li><li class="nav-item"><a class="nav-link" href="upper.html">Upper Body</a></li><li class="nav-item"><a class="nav-link" href="lower.html">Lower Body</a></li><li class="nav-item"><a class="nav-link" href="crossfit.html">CrossFit</a></li><li class="nav-item"><a class="nav-link active" aria-current="page" href="contact.html">Contact</a></li></ul></div></div></nav></header>
-<main id="main-content">
-    <section class="page-title">
-        <div class="container">
-            <h1>CONTACT GYMZONE</h1>
-            <p>Ask a question or tell us about your fitness goal.</p>
-        </div>
-    </section>
-    <section class="section contact-section">
-        <div class="container">
-          <div class="contact-grid row g-5">
-            <div class="col-12 col-lg-6">
-                <h2 class="section-title contact-title">START YOUR JOURNEY</h2>
-                <p class="contact-copy">
-                    Choose a training focus and send us a message. We will use your
-                    goal to help you find the right exercises.
-                </p>
-                <h3 class="contact-subtitle">How to begin</h3>
-                <ol class="steps-list">
-                    <li>Choose a body area or training style.</li>
-                    <li>Review the exercise technique.</li>
-                    <li>Build a consistent weekly routine.</li>
-                </ol>
-                <table class="workout-table">
-                    <caption>Suggested weekly training schedule</caption>
-                    <thead>
-                        <tr>
-                            <th>Goal</th>
-                            <th>Focus</th>
-                            <th>Suggested Days</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Strength</td>
-                            <td>Upper Body</td>
-                            <td>3 days</td>
-                        </tr>
-                        <tr>
-                            <td>Leg Power</td>
-                            <td>Lower Body</td>
-                            <td>2 days</td>
-                        </tr>
-                        <tr>
-                            <td>Endurance</td>
-                            <td>CrossFit</td>
-                            <td>2-3 days</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <form id="contact-form" class="col-12 col-lg-6 p-4" action="mailto:ernarface12@gmail.com" method="post" enctype="text/plain">
-                <h2>Send a Message</h2>
-                <div class="mb-3"><label class="form-label" for="name">Name</label><input class="form-control" id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required></div>
-                <div class="mb-3"><label class="form-label" for="email">Email</label><div class="input-group"><span class="input-group-text">@</span><input class="form-control" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div></div>
-                <div class="mb-3"><label class="form-label" for="focus">Training focus</label><select class="form-select" id="focus" name="focus" required>
-                    <option value="">Select a focus</option>
-                    <option value="upper-body">Upper Body</option>
-                    <option value="lower-body">Lower Body</option>
-                    <option value="crossfit">CrossFit</option>
-                </select></div>
-                <div class="mb-3"><label class="form-label" for="message">Message</label><textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell us about your goal" required></textarea></div>
-                <fieldset class="mb-3">
-                    <legend class="form-label mb-2">Experience level</legend>
-                    <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-4">
-                        <div class="form-check"><input class="form-check-input" id="experience-beginner" name="experience" type="radio" value="beginner" required><label class="form-check-label" for="experience-beginner">Beginner</label></div>
-                        <div class="form-check"><input class="form-check-input" id="experience-intermediate" name="experience" type="radio" value="intermediate"><label class="form-check-label" for="experience-intermediate">Intermediate</label></div>
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#111111" />
+        <title>Contact GYMZONE</title>
+        <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+        <header id="main-header">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">GYMZONE</a
+                    ><button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="mainNavbar">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="upper.html">Upper Body</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="lower.html">Lower Body</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="crossfit.html">CrossFit</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="contact.html"
+                                    >Contact</a
+                                >
+                            </li>
+                        </ul>
                     </div>
-                </fieldset>
-                <div class="form-check mb-3"><input class="form-check-input" id="updates" name="updates" type="checkbox"><label class="form-check-label" for="updates">Send occasional training tips</label></div>
-                <button class="btn btn-primary btn-lg w-100" type="submit">Send Message</button>
-            </form>
-          </div>
-        </div>
-    </section>
-</main>
-<footer id="main-footer">
-    <div class="container footer-content">
-        <div class="footer-brand"><a href="index.html" class="logo">GYMZONE</a><p>Exercise &amp; Fitness Guide</p></div>
-        <div class="footer-links"><a href="upper.html">Upper Body</a><a href="lower.html">Lower Body</a><a href="crossfit.html">CrossFit</a><a href="contact.html">Contact</a></div>
-        <div class="footer-team"><p>Team: Umirgaliyev Yernar &amp; Kazybek Karabala</p><p>Astana IT University &copy; 2026</p><a class="footer-contact" href="mailto:ernarface12@gmail.com">ernarface12@gmail.com</a></div>
-    </div>
-</footer>
-<script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
-</body>
+                </div>
+            </nav>
+        </header>
+        <main id="main-content">
+            <section class="page-title py-5">
+                <div class="container">
+                    <h1>CONTACT GYMZONE</h1>
+                    <p>Ask a question or tell us about your fitness goal.</p>
+                </div>
+            </section>
+            <section class="section contact-section py-5">
+                <div class="container">
+                    <div class="contact-grid row g-5">
+                        <div class="col-12 col-lg-6">
+                            <h2 class="section-title contact-title">START YOUR JOURNEY</h2>
+                            <p class="contact-copy">
+                                Choose a training focus and send us a message. We will use your goal
+                                to help you find the right exercises.
+                            </p>
+                            <h3 class="contact-subtitle mt-4 mb-3">How to begin</h3>
+                            <ol class="steps-list mb-4">
+                                <li>Choose a body area or training style.</li>
+                                <li>Review the exercise technique.</li>
+                                <li>Build a consistent weekly routine.</li>
+                            </ol>
+                            <table class="workout-table mt-4">
+                                <caption>
+                                    Suggested weekly training schedule
+                                </caption>
+                                <thead>
+                                    <tr>
+                                        <th>Goal</th>
+                                        <th>Focus</th>
+                                        <th>Suggested Days</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Strength</td>
+                                        <td>Upper Body</td>
+                                        <td>3 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Leg Power</td>
+                                        <td>Lower Body</td>
+                                        <td>2 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Endurance</td>
+                                        <td>CrossFit</td>
+                                        <td>2-3 days</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <form
+                            id="contact-form"
+                            class="col-12 col-lg-6 p-4 p-lg-5"
+                            action="mailto:ernarface12@gmail.com"
+                            method="post"
+                            enctype="text/plain"
+                        >
+                            <h2 class="mb-4">Send a Message</h2>
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Name</label
+                                ><input
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    autocomplete="name"
+                                    placeholder="Your name"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="email">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">@</span
+                                    ><input
+                                        class="form-control"
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        autocomplete="email"
+                                        placeholder="you@example.com"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="focus">Training focus</label
+                                ><select class="form-select" id="focus" name="focus" required>
+                                    <option value="">Select a focus</option>
+                                    <option value="upper-body">Upper Body</option>
+                                    <option value="lower-body">Lower Body</option>
+                                    <option value="crossfit">CrossFit</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="message">Message</label
+                                ><textarea
+                                    class="form-control"
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    placeholder="Tell us about your goal"
+                                    required
+                                ></textarea>
+                            </div>
+                            <fieldset class="mb-3">
+                                <legend class="form-label mb-2">Experience level</legend>
+                                <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-4">
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            id="experience-beginner"
+                                            name="experience"
+                                            type="radio"
+                                            value="beginner"
+                                            required
+                                        /><label class="form-check-label" for="experience-beginner"
+                                            >Beginner</label
+                                        >
+                                    </div>
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            id="experience-intermediate"
+                                            name="experience"
+                                            type="radio"
+                                            value="intermediate"
+                                        /><label
+                                            class="form-check-label"
+                                            for="experience-intermediate"
+                                            >Intermediate</label
+                                        >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-check mb-3">
+                                <input
+                                    class="form-check-input"
+                                    id="updates"
+                                    name="updates"
+                                    type="checkbox"
+                                /><label class="form-check-label" for="updates"
+                                    >Send occasional training tips</label
+                                >
+                            </div>
+                            <button class="btn btn-primary btn-lg w-100" type="submit">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer id="main-footer" class="site-footer py-5">
+            <div class="container footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">GYMZONE</a>
+                    <p>Exercise &amp; Fitness Guide</p>
+                </div>
+                <div class="footer-links">
+                    <a href="upper.html">Upper Body</a><a href="lower.html">Lower Body</a
+                    ><a href="crossfit.html">CrossFit</a><a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-team">
+                    <p>Team: Umirgaliyev Yernar &amp; Kazybek Karabala</p>
+                    <p>Astana IT University &copy; 2026</p>
+                    <a class="footer-contact" href="mailto:ernarface12@gmail.com"
+                        >ernarface12@gmail.com</a
+                    >
+                </div>
+            </div>
+        </footer>
+        <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    </body>
 </html>
