@@ -23,15 +23,15 @@
 }
 
 :root {
-    --paper: #101311;
-    --surface: #191e1a;
-    --surface-raised: #232a24;
+    --paper: #111715;
+    --surface: #19221b;
+    --surface-raised: #253127;
     --ink: #f2f4ee;
-    --muted: #b0b9ae;
-    --line: #374039;
-    --accent: #d2ed75;
-    --accent-hover: #e2f5a3;
-    --accent-ink: #16200d;
+    --muted: #b5c2b4;
+    --line: #354a38;
+    --accent: #a9f51b;
+    --accent-hover: #c5ff61;
+    --accent-ink: #17210c;
     --radius: 8px;
     --font-body: "DM Sans", sans-serif;
     --font-heading: "Space Grotesk", sans-serif;
@@ -145,7 +145,7 @@ textarea:focus-visible {
 }
 
 .navbar {
-    --bs-dark-rgb: 16, 19, 17;
+    --bs-dark-rgb: 17, 23, 21;
     --bs-navbar-color: var(--muted);
     --bs-navbar-hover-color: var(--ink);
     --bs-navbar-active-color: var(--ink);
@@ -159,21 +159,35 @@ textarea:focus-visible {
 .logo {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    color: var(--ink);
-    font-size: 1.55rem;
-    font-weight: 700;
-    letter-spacing: -0.055em;
+    padding: 0;
+    line-height: 1;
 }
 
-.navbar-brand::before,
-.logo::before {
-    content: "";
-    width: 9px;
-    height: 20px;
-    border-radius: 2px;
-    background: var(--accent);
-    transform: skewX(-12deg);
+.navbar-brand img {
+    width: 212px;
+    height: auto;
+}
+
+.logo img {
+    width: 270px;
+    height: auto;
+}
+
+.navbar-brand,
+.logo,
+.footer-links a,
+.footer-email,
+.footer-top,
+.sidebar-nav a {
+    transition:
+        color 220ms ease,
+        opacity 220ms ease,
+        transform 220ms ease;
+}
+
+.navbar-brand:hover,
+.logo:hover {
+    opacity: 0.88;
 }
 
 .navbar-nav {
@@ -268,14 +282,14 @@ textarea:focus-visible {
 
 .hero-content {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
     align-items: center;
     gap: 40px;
 }
 
 .hero h1 {
     margin-bottom: 24px;
-    font-size: clamp(3.5rem, 5.5vw, 5.5rem);
+    font-size: clamp(3rem, 4.4vw, 4.5rem);
     line-height: 1.03;
     letter-spacing: -0.055em;
 }
@@ -293,12 +307,12 @@ textarea:focus-visible {
 }
 
 .hero img {
-    justify-self: end;
-    max-width: 350px;
-    height: 490px;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 16 / 9;
     border-radius: var(--radius);
-    object-fit: cover;
-    object-position: left center;
+    object-fit: contain;
 }
 
 .section-title {
@@ -832,7 +846,7 @@ a.card:hover {
 #contact-form .form-select:focus,
 #contact-form .form-check-input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgb(210 237 117 / 18%);
+    box-shadow: 0 0 0 3px rgb(169 245 27 / 18%);
 }
 
 #contact-form .form-check-input {
@@ -868,35 +882,135 @@ a.card:hover {
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1.3fr;
+    grid-template-columns: 1.2fr 0.8fr 1fr;
     align-items: start;
-    gap: 32px;
+    gap: 48px;
 }
 
-.footer-content p {
-    margin-block: 12px;
+.footer-brand p,
+.footer-connect p {
+    max-width: 34ch;
     color: var(--muted);
-    font-size: 0.85rem;
+    font-size: 0.95rem;
+}
+
+.footer-heading {
+    color: var(--ink);
+    font-size: 1rem;
+    letter-spacing: -0.02em;
 }
 
 .footer-links {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
-    font-size: 0.9rem;
+    gap: 6px;
 }
 
-.footer-team {
-    text-align: right;
+.footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    color: var(--muted);
+    font-size: 0.95rem;
 }
 
-.footer-team p:first-child {
-    margin-top: 0;
+.footer-links a:hover,
+.footer-links a:focus-visible {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+.footer-email {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    color: var(--muted);
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+.footer-email:hover {
+    color: var(--accent);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    border-top: 1px solid var(--line);
+}
+
+.footer-credits p {
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.footer-credits p:first-child {
     color: var(--ink);
 }
 
+.footer-top {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 16px;
+    min-height: 44px;
+    color: var(--accent);
+    font-size: 0.85rem;
+}
+
+.footer-top span {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition:
+        transform 220ms ease,
+        border-color 220ms ease;
+}
+
+.footer-top:hover span {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero-content > div,
+    .page-title .container {
+        animation: content-enter 550ms ease-out both;
+    }
+
+    .hero img {
+        animation: content-enter 650ms 80ms ease-out both;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+}
+
+@keyframes content-enter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Responsive typography and custom layouts */
+
 @media (max-width: 991px) {
     .navbar-collapse {
         padding-block: 16px;
@@ -916,10 +1030,6 @@ a.card:hover {
 
     .hero h1 {
         font-size: 3rem;
-    }
-
-    .hero img {
-        height: 400px;
     }
 
     .card-grid {
@@ -980,8 +1090,8 @@ a.card:hover {
         font-size: 1rem;
     }
 
-    .hero img {
-        height: 360px;
+    .hero-content {
+        grid-template-columns: 1fr;
     }
 
     .section-title {
@@ -1010,9 +1120,8 @@ a.card:hover {
         grid-template-columns: 1fr 1fr;
     }
 
-    .footer-team {
+    .footer-brand {
         grid-column: 1 / -1;
-        text-align: left;
     }
 
     .motivation .container {
@@ -1107,6 +1216,16 @@ a.card:hover {
 
     .footer-content {
         grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .navbar-brand img {
+        width: 190px;
     }
 }
 

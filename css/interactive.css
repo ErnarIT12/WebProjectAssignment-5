@@ -1,0 +1,265 @@
+body,
+.sidebar,
+.page-title,
+#main-footer,
+.navbar,
+.profile-dialog,
+.faq-item,
+#categories,
+#bootstrap-cards,
+.team-section {
+    transition:
+        background-color 300ms ease,
+        border-color 300ms ease;
+}
+
+.footer-tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    border-top: 1px solid var(--line);
+}
+
+.footer-clock {
+    display: grid;
+    gap: 8px;
+}
+
+.footer-clock time {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.footer-tool-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.interactive-muted,
+.form-help {
+    color: var(--muted);
+}
+
+.faq-list {
+    max-width: 900px;
+    border-top: 1px solid var(--line);
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--line);
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    padding: 24px 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    text-align: left;
+    transition: color 200ms ease;
+}
+
+.faq-question:hover,
+.faq-question[aria-expanded="true"] {
+    color: var(--accent);
+}
+
+.faq-question span {
+    flex-shrink: 0;
+    color: var(--accent);
+    font-size: 1.6rem;
+    transition: transform 250ms ease;
+}
+
+.faq-question[aria-expanded="true"] span {
+    transform: rotate(45deg);
+}
+
+.faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+        grid-template-rows 280ms ease,
+        opacity 280ms ease;
+}
+
+.faq-panel.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.faq-answer {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.faq-answer p {
+    max-width: 70ch;
+    margin: 0;
+    padding: 0 24px 24px 0;
+    color: var(--muted);
+}
+
+.dialog-is-open {
+    overflow: hidden;
+}
+
+.profile-dialog {
+    width: min(560px, calc(100% - 32px));
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+}
+
+.profile-dialog::backdrop {
+    background: rgb(5 10 7 / 82%);
+}
+
+.profile-dialog-content {
+    position: relative;
+}
+
+.profile-dialog h2 {
+    max-width: 90%;
+    font-size: 1.75rem;
+    letter-spacing: -0.04em;
+}
+
+.dialog-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 1.5rem;
+    line-height: 1;
+    transition:
+        color 200ms ease,
+        border-color 200ms ease;
+}
+
+.dialog-close:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+#profile-form .form-control {
+    min-height: 48px;
+    border-color: #626e61;
+    border-radius: var(--radius);
+    background-color: var(--paper);
+    color: var(--ink);
+}
+
+#profile-form .form-control:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgb(169 245 27 / 18%);
+}
+
+.field-error,
+.form-help {
+    margin: 8px 0 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.field-error {
+    color: #ffaaa4;
+}
+
+.field-error:empty,
+.form-status:empty {
+    display: none;
+}
+
+.form-status {
+    margin-bottom: 16px;
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+#profile-form .is-invalid,
+#contact-form .is-invalid {
+    border-color: #ffaaa4;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .profile-dialog[open] {
+        animation: dialog-enter 220ms ease-out;
+    }
+
+    .profile-dialog[open]::backdrop {
+        animation: backdrop-enter 220ms ease-out;
+    }
+}
+
+@keyframes dialog-enter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes backdrop-enter {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 520px) {
+    .footer-tools {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .footer-tool-buttons {
+        width: 100%;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

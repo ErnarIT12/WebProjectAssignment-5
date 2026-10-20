@@ -1,0 +1,204 @@
+"use strict";
+
+const backgroundThemes = [
+    { name: "Forest", background: "#111715", surface: "#19221b", raised: "#253127" },
+    { name: "Graphite", background: "#17191c", surface: "#202429", raised: "#2c3238" },
+    { name: "Midnight", background: "#111c24", surface: "#192831", raised: "#253842" },
+];
+
+function initializeBackgroundButton() {
+    const button = document.querySelector("#change-background");
+    if (!button) return;
+
+    let themeIndex = 0;
+    button.addEventListener("click", () => {
+        themeIndex = (themeIndex + 1) % backgroundThemes.length;
+        const theme = backgroundThemes[themeIndex];
+        const root = document.documentElement;
+        root.style.setProperty("--paper", theme.background);
+        root.style.setProperty("--surface", theme.surface);
+        root.style.setProperty("--surface-raised", theme.raised);
+        document.body.style.backgroundColor = theme.background;
+        document.querySelector(".navbar")?.style.setProperty(
+            "--bs-dark-rgb",
+            theme.background
+                .match(/[a-f\d]{2}/gi)
+                .map((value) => parseInt(value, 16))
+                .join(", "),
+        );
+        document
+            .querySelector('meta[name="theme-color"]')
+            ?.setAttribute("content", theme.background);
+        button.textContent = `Background: ${theme.name}`;
+        document.querySelector("#background-status").textContent =
+            `${theme.name} background selected.`;
+    });
+}
+
+function initializeClock() {
+    const clock = document.querySelector("#current-datetime");
+    if (!clock) return;
+
+    const dateFormat = new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
+    const timeFormat = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "short",
+    });
+
+    function updateClock() {
+        const now = new Date();
+        clock.dateTime = now.toISOString();
+        clock.textContent = `${dateFormat.format(now)}, ${timeFormat.format(now)}`;
+    }
+
+    updateClock();
+    window.setInterval(updateClock, 1000);
+}
+
+function initializeAccordion() {
+    document.querySelectorAll(".faq-question").forEach((button) => {
+        const panel = document.getElementById(button.getAttribute("aria-controls"));
+        button.addEventListener("click", () => {
+            const expanded = button.getAttribute("aria-expanded") !== "true";
+            button.setAttribute("aria-expanded", String(expanded));
+            panel.setAttribute("aria-hidden", String(!expanded));
+            panel.inert = !expanded;
+            panel.classList.toggle("is-open", expanded);
+        });
+    });
+}
+
+function getFieldError(field, form) {
+    const value = field.value.trim();
+    const label = field.dataset.label || "This field";
+
+    if (field.type === "radio") {
+        return form.querySelector(`input[name="${field.name}"]:checked`)
+            ? ""
+            : "Choose your experience level.";
+    }
+    if (field.required && !value) return `${label} is required.`;
+    if (field.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        return "Enter a valid email, for example name@example.com.";
+    }
+    if (field.name === "password" && field.value.length < 8) {
+        return "Use at least 8 characters for your password.";
+    }
+    if (field.name === "confirmPassword" && field.value !== form.elements.password.value) {
+        return "Passwords must match.";
+    }
+    return "";
+}
+
+function showFieldError(field, message) {
+    const errorId = field.type === "radio" ? "experience-error" : `${field.id}-error`;
+    const error = document.getElementById(errorId);
+    if (error) error.textContent = message;
+    field.classList.toggle("is-invalid", Boolean(message));
+    if (message) field.setAttribute("aria-invalid", "true");
+    else field.removeAttribute("aria-invalid");
+}
+
+function initializeValidation() {
+    document.querySelectorAll("form[data-validate]").forEach((form) => {
+        const fields = [
+            ...form.querySelectorAll("input[required], select[required], textarea[required]"),
+        ];
+        const status = form.querySelector(".form-status");
+        let submitted = false;
+
+        function validateField(field) {
+            const message = getFieldError(field, form);
+            showFieldError(field, message);
+            return !message;
+        }
+
+        form.addEventListener("submit", (event) => {
+            submitted = true;
+            const results = fields.map(validateField);
+            if (results.includes(false)) {
+                event.preventDefault();
+                status.textContent = "Please correct the highlighted fields.";
+                fields[results.indexOf(false)].focus();
+                return;
+            }
+
+            if (form.id === "profile-form") {
+                event.preventDefault();
+                status.textContent =
+                    "All details are valid. Demo complete: no account was created and nothing was sent or saved.";
+                form.elements.password.value = "";
+                form.elements.confirmPassword.value = "";
+                submitted = false;
+            } else {
+                status.textContent = "Your email app will open to send the message.";
+            }
+        });
+
+        form.addEventListener("input", (event) => {
+            if (!submitted) return;
+            if (fields.includes(event.target)) validateField(event.target);
+            if (event.target.name === "password" && form.elements.confirmPassword.value) {
+                validateField(form.elements.confirmPassword);
+            }
+            status.textContent = "";
+        });
+
+        form.addEventListener("change", (event) => {
+            if (submitted && event.target.type === "radio") {
+                const radio = fields.find((field) => field.type === "radio");
+                if (radio) validateField(radio);
+                status.textContent = "";
+            }
+        });
+
+        form.addEventListener("reset", () => {
+            submitted = false;
+            fields.forEach((field) => showFieldError(field, ""));
+            status.textContent = "";
+        });
+    });
+}
+
+function initializeProfileDialog() {
+    const dialog = document.querySelector("#profile-dialog");
+    if (!dialog) return;
+    let opener;
+
+    document.querySelectorAll("[data-open-profile]").forEach((button) => {
+        button.addEventListener("click", () => {
+            opener = button;
+            dialog.showModal();
+            document.body.classList.add("dialog-is-open");
+        });
+    });
+
+    dialog.querySelector("[data-close-profile]").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+        if (event.target !== dialog) return;
+        const bounds = dialog.getBoundingClientRect();
+        const outside =
+            event.clientX < bounds.left ||
+            event.clientX > bounds.right ||
+            event.clientY < bounds.top ||
+            event.clientY > bounds.bottom;
+        if (outside) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+        document.body.classList.remove("dialog-is-open");
+        dialog.querySelector("form").reset();
+        opener?.focus();
+    });
+}
+
+initializeBackgroundButton();
+initializeClock();
+initializeAccordion();
+initializeValidation();
+initializeProfileDialog();

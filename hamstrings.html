@@ -6,13 +6,19 @@
         <title>Hamstrings & Glutes</title>
         <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/interactive.css" />
     </head>
     <body>
         <a class="skip-link" href="#main-content">Skip to main content</a>
         <header id="main-header">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main navigation">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">GYMZONE</a
+                    <a class="navbar-brand" href="index.html"
+                        ><img
+                            src="images/gymzone-logo.png"
+                            alt="GYMZONE"
+                            width="1024"
+                            height="285" /></a
                     ><button
                         class="navbar-toggler"
                         type="button"
@@ -103,23 +109,169 @@
                 </div>
             </section>
         </main>
-        <footer id="main-footer" class="site-footer py-5">
-            <div class="container footer-content">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">GYMZONE</a>
-                    <p>Exercise &amp; Fitness Guide</p>
+        <footer id="main-footer" class="site-footer pt-5 pb-4">
+            <div class="container">
+                <div class="footer-content pb-4 pb-lg-5">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo" aria-label="GYMZONE home">
+                            <img
+                                src="images/gymzone-logo.png"
+                                alt="GYMZONE"
+                                width="1024"
+                                height="285"
+                                loading="lazy"
+                            />
+                        </a>
+                        <p class="mt-3 mb-0">
+                            Your guide to strength, technique and a balanced training routine.
+                        </p>
+                    </div>
+                    <nav class="footer-links" aria-label="Footer training navigation">
+                        <h2 class="footer-heading mb-2">Explore training</h2>
+                        <a href="upper.html">Upper Body</a>
+                        <a href="lower.html">Lower Body</a>
+                        <a href="crossfit.html">CrossFit</a>
+                        <a href="index.html#gallery">Movement Gallery</a>
+                    </nav>
+                    <div class="footer-connect">
+                        <h2 class="footer-heading mb-3">Let's talk training</h2>
+                        <p class="mb-3">
+                            Have a question about the exercises or your next workout?
+                        </p>
+                        <a href="contact.html" class="btn btn-outline-primary">Contact us</a>
+                        <a class="footer-email mt-3" href="mailto:ernarface12@gmail.com"
+                            >ernarface12@gmail.com</a
+                        >
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <a href="upper.html">Upper Body</a><a href="lower.html">Lower Body</a
-                    ><a href="crossfit.html">CrossFit</a><a href="contact.html">Contact</a>
+                <div class="footer-tools py-4">
+                    <div class="footer-clock">
+                        <span class="footer-heading">Local date &amp; time</span>
+                        <time id="current-datetime" aria-live="off">Loading local time...</time>
+                    </div>
+                    <div class="footer-tool-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-secondary btn-sm"
+                            id="change-background"
+                        >
+                            Background: Forest
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm" data-open-profile>
+                            Join GYMZONE
+                        </button>
+                    </div>
+                    <span id="background-status" class="visually-hidden" role="status"></span>
                 </div>
-                <div class="footer-team">
-                    <p>Team: Umirgaliyev Yernar &amp; Kazybek Karabala</p>
-                    <p>Astana IT University &copy; 2026</p>
-                    <a class="footer-contact" href="mailto:ernarface12@gmail.com">Contact us</a>
+                <div class="footer-bottom pt-4">
+                    <div class="footer-credits">
+                        <p class="mb-1">Team: Umirgaliyev Yernar &amp; Kazybek Karabala</p>
+                        <p class="mb-0">Astana IT University &copy; 2026 · GYMZONE</p>
+                    </div>
+                    <a class="footer-top" href="#main-header"
+                        >Back to top <span aria-hidden="true">↑</span></a
+                    >
                 </div>
             </div>
         </footer>
+        <dialog
+            id="profile-dialog"
+            class="profile-dialog"
+            aria-labelledby="profile-title"
+            aria-describedby="profile-description"
+        >
+            <div class="profile-dialog-content p-4 p-sm-5">
+                <button
+                    type="button"
+                    class="dialog-close"
+                    data-close-profile
+                    aria-label="Close profile form"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 id="profile-title" class="mb-3">Join GYMZONE updates</h2>
+                <p id="profile-description" class="interactive-muted mb-4">
+                    Try the sign-up form. This demo checks your details in this browser only. No
+                    account is created and no password is saved.
+                </p>
+                <form id="profile-form" data-validate novalidate>
+                    <div class="mb-3">
+                        <label class="form-label" for="profile-name">Name</label>
+                        <input
+                            class="form-control"
+                            id="profile-name"
+                            name="name"
+                            autocomplete="name"
+                            required
+                            maxlength="80"
+                            data-label="Name"
+                            aria-describedby="profile-name-error"
+                        />
+                        <p class="field-error" id="profile-name-error"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="profile-email">Email</label>
+                        <input
+                            class="form-control"
+                            id="profile-email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            required
+                            data-label="Email"
+                            aria-describedby="profile-email-error"
+                        />
+                        <p class="field-error" id="profile-email-error"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="profile-password">Password</label>
+                        <input
+                            class="form-control"
+                            id="profile-password"
+                            name="password"
+                            type="password"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                            data-label="Password"
+                            aria-describedby="password-help profile-password-error"
+                        />
+                        <p class="form-help" id="password-help">
+                            Use at least 8 characters. Do not enter a password you use elsewhere.
+                        </p>
+                        <p class="field-error" id="profile-password-error"></p>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="profile-confirm">Confirm password</label>
+                        <input
+                            class="form-control"
+                            id="profile-confirm"
+                            name="confirmPassword"
+                            type="password"
+                            autocomplete="new-password"
+                            required
+                            data-label="Password confirmation"
+                            aria-describedby="profile-confirm-error"
+                        />
+                        <p class="field-error" id="profile-confirm-error"></p>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input
+                            class="form-check-input"
+                            id="profile-updates"
+                            name="updates"
+                            type="checkbox"
+                        />
+                        <label class="form-check-label" for="profile-updates"
+                            >Subscribe to training updates</label
+                        >
+                    </div>
+                    <p class="form-status" id="profile-status" role="status" aria-live="polite"></p>
+                    <button type="submit" class="btn btn-primary w-100">Check my profile</button>
+                </form>
+            </div>
+        </dialog>
         <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="js/main.js" defer></script>
     </body>
 </html>
