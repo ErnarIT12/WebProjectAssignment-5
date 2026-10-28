@@ -4,9 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Back Exercises</title>
+        <link rel="icon" type="image/png" href="images/gymzone-logo.png" />
         <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/interactive.css" />
+        <link rel="stylesheet" href="css/advanced.css" />
     </head>
     <body>
         <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -149,6 +151,14 @@
                         <button
                             type="button"
                             class="btn btn-secondary btn-sm"
+                            id="toggle-sound"
+                            aria-pressed="false"
+                        >
+                            Sound: Off
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-secondary btn-sm"
                             id="change-background"
                         >
                             Background: Forest
@@ -158,6 +168,7 @@
                         </button>
                     </div>
                     <span id="background-status" class="visually-hidden" role="status"></span>
+                    <span id="sound-status" class="visually-hidden" role="status"></span>
                 </div>
                 <div class="footer-bottom pt-4">
                     <div class="footer-credits">
@@ -190,84 +201,114 @@
                     Try the sign-up form. This demo checks your details in this browser only. No
                     account is created and no password is saved.
                 </p>
-                <form id="profile-form" data-validate novalidate>
-                    <div class="mb-3">
-                        <label class="form-label" for="profile-name">Name</label>
-                        <input
-                            class="form-control"
-                            id="profile-name"
-                            name="name"
-                            autocomplete="name"
-                            required
-                            maxlength="80"
-                            data-label="Name"
-                            aria-describedby="profile-name-error"
-                        />
-                        <p class="field-error" id="profile-name-error"></p>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="profile-email">Email</label>
-                        <input
-                            class="form-control"
-                            id="profile-email"
-                            name="email"
-                            type="email"
-                            autocomplete="email"
-                            required
-                            data-label="Email"
-                            aria-describedby="profile-email-error"
-                        />
-                        <p class="field-error" id="profile-email-error"></p>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="profile-password">Password</label>
-                        <input
-                            class="form-control"
-                            id="profile-password"
-                            name="password"
-                            type="password"
-                            autocomplete="new-password"
-                            minlength="8"
-                            required
-                            data-label="Password"
-                            aria-describedby="password-help profile-password-error"
-                        />
-                        <p class="form-help" id="password-help">
-                            Use at least 8 characters. Do not enter a password you use elsewhere.
+                <form id="profile-form" data-validate data-multistep method="dialog" novalidate>
+                    <p id="profile-progress" class="profile-progress" role="status">
+                        Step 1 of 3: Your details
+                    </p>
+                    <fieldset data-profile-step="0" class="wizard-step">
+                        <legend tabindex="-1">Your details</legend>
+                        <div class="mb-3">
+                            <label class="form-label" for="profile-name">Name</label>
+                            <input
+                                class="form-control"
+                                id="profile-name"
+                                name="name"
+                                autocomplete="name"
+                                required
+                                maxlength="80"
+                                data-label="Name"
+                                aria-describedby="profile-name-error"
+                            />
+                            <p class="field-error" id="profile-name-error"></p>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="profile-email">Email</label>
+                            <input
+                                class="form-control"
+                                id="profile-email"
+                                name="email"
+                                type="email"
+                                autocomplete="email"
+                                required
+                                data-label="Email"
+                                aria-describedby="profile-email-error"
+                            />
+                            <p class="field-error" id="profile-email-error"></p>
+                        </div>
+                    </fieldset>
+                    <fieldset data-profile-step="1" class="wizard-step" hidden>
+                        <legend tabindex="-1">Password &amp; updates</legend>
+                        <div class="mb-3">
+                            <label class="form-label" for="profile-password">Password</label>
+                            <input
+                                class="form-control"
+                                id="profile-password"
+                                name="password"
+                                type="password"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                                data-label="Password"
+                                aria-describedby="password-help profile-password-error"
+                            />
+                            <p class="form-help" id="password-help">
+                                Use at least 8 characters. Do not enter a password you use
+                                elsewhere.
+                            </p>
+                            <p class="field-error" id="profile-password-error"></p>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="profile-confirm">Confirm password</label>
+                            <input
+                                class="form-control"
+                                id="profile-confirm"
+                                name="confirmPassword"
+                                type="password"
+                                autocomplete="new-password"
+                                required
+                                data-label="Password confirmation"
+                                aria-describedby="profile-confirm-error"
+                            />
+                            <p class="field-error" id="profile-confirm-error"></p>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input
+                                class="form-check-input"
+                                id="profile-updates"
+                                name="updates"
+                                type="checkbox"
+                            />
+                            <label class="form-check-label" for="profile-updates"
+                                >Subscribe to training updates</label
+                            >
+                        </div>
+                    </fieldset>
+                    <fieldset data-profile-step="2" class="wizard-step" hidden>
+                        <legend tabindex="-1">Review your details</legend>
+                        <dl id="profile-review" class="profile-review mb-4"></dl>
+                        <p class="form-help mb-4">
+                            Passwords are never displayed here. This is a local demonstration, not
+                            an account registration service.
                         </p>
-                        <p class="field-error" id="profile-password-error"></p>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label" for="profile-confirm">Confirm password</label>
-                        <input
-                            class="form-control"
-                            id="profile-confirm"
-                            name="confirmPassword"
-                            type="password"
-                            autocomplete="new-password"
-                            required
-                            data-label="Password confirmation"
-                            aria-describedby="profile-confirm-error"
-                        />
-                        <p class="field-error" id="profile-confirm-error"></p>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input
-                            class="form-check-input"
-                            id="profile-updates"
-                            name="updates"
-                            type="checkbox"
-                        />
-                        <label class="form-check-label" for="profile-updates"
-                            >Subscribe to training updates</label
-                        >
-                    </div>
+                    </fieldset>
                     <p class="form-status" id="profile-status" role="status" aria-live="polite"></p>
-                    <button type="submit" class="btn btn-primary w-100">Check my profile</button>
+                    <div class="wizard-actions">
+                        <button type="button" class="btn btn-secondary" data-back-step hidden>
+                            Back
+                        </button>
+                        <button type="button" class="btn btn-primary" data-next-step>Next</button>
+                        <button type="submit" class="btn btn-primary" hidden>
+                            Check my profile
+                        </button>
+                        <button type="reset" class="btn btn-outline-primary">Reset form</button>
+                    </div>
                 </form>
             </div>
         </dialog>
         <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+        <audio id="completion-sound" src="audio/success.wav" preload="none"></audio>
+        <script src="js/exercises.js" defer></script>
         <script src="js/main.js" defer></script>
+        <script src="js/advanced.js" defer></script>
     </body>
 </html>

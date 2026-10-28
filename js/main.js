@@ -84,8 +84,18 @@ function getFieldError(field, form) {
             : "Choose your experience level.";
     }
     if (field.required && !value) return `${label} is required.`;
-    if (field.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        return "Enter a valid email, for example name@example.com.";
+    if (field.maxLength >= 0 && field.value.length > field.maxLength) {
+        return `${label} must be ${field.maxLength} characters or fewer.`;
+    }
+    if (field.type === "email" && value) {
+        const localPart = value.split("@")[0];
+        const invalidDots =
+            localPart.startsWith(".") || localPart.endsWith(".") || localPart.includes("..");
+        const invalidFormat =
+            field.validity.typeMismatch || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        if (invalidFormat || invalidDots) {
+            return "Enter a valid email, for example name@example.com.";
+        }
     }
     if (field.name === "password" && field.value.length < 8) {
         return "Use at least 8 characters for your password.";
@@ -106,7 +116,7 @@ function showFieldError(field, message) {
 }
 
 function initializeValidation() {
-    document.querySelectorAll("form[data-validate]").forEach((form) => {
+    document.querySelectorAll("form[data-validate]:not([data-multistep])").forEach((form) => {
         const fields = [
             ...form.querySelectorAll("input[required], select[required], textarea[required]"),
         ];
@@ -129,24 +139,12 @@ function initializeValidation() {
                 return;
             }
 
-            if (form.id === "profile-form") {
-                event.preventDefault();
-                status.textContent =
-                    "All details are valid. Demo complete: no account was created and nothing was sent or saved.";
-                form.elements.password.value = "";
-                form.elements.confirmPassword.value = "";
-                submitted = false;
-            } else {
-                status.textContent = "Your email app will open to send the message.";
-            }
+            status.textContent = "Your email app will open to send the message.";
         });
 
         form.addEventListener("input", (event) => {
             if (!submitted) return;
             if (fields.includes(event.target)) validateField(event.target);
-            if (event.target.name === "password" && form.elements.confirmPassword.value) {
-                validateField(form.elements.confirmPassword);
-            }
             status.textContent = "";
         });
 

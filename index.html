@@ -5,9 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#111715" />
         <title>GYMZONE - Home</title>
+        <link rel="icon" type="image/png" href="images/gymzone-logo.png" />
         <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/interactive.css" />
+        <link rel="stylesheet" href="css/advanced.css" />
     </head>
     <body>
         <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -353,8 +355,56 @@
                 </section>
                 <section class="section gallery-section py-5" id="bootstrap-cards">
                     <div class="container">
-                        <h2 class="section-title mb-4">START WITH A FOCUS</h2>
-                        <div class="row g-4">
+                        <h2 class="section-title mb-4">EXERCISE EXPLORER</h2>
+                        <p class="interactive-muted mb-4">
+                            Filter movements by training focus, then open a technique guide.
+                        </p>
+                        <div
+                            class="exercise-filters mb-3"
+                            role="group"
+                            aria-label="Exercise categories"
+                        >
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm"
+                                data-exercise-filter="all"
+                                aria-pressed="true"
+                                disabled
+                            >
+                                All
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm"
+                                data-exercise-filter="upper"
+                                aria-pressed="false"
+                                disabled
+                            >
+                                Upper Body
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm"
+                                data-exercise-filter="lower"
+                                aria-pressed="false"
+                                disabled
+                            >
+                                Lower Body
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm"
+                                data-exercise-filter="conditioning"
+                                aria-pressed="false"
+                                disabled
+                            >
+                                CrossFit
+                            </button>
+                        </div>
+                        <p id="exercise-count" class="catalog-count mb-4" role="status">
+                            Choose a training category below.
+                        </p>
+                        <div class="row g-4" id="exercise-results">
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="card bootstrap-card h-100">
                                     <img
@@ -612,79 +662,53 @@
                         </div>
                     </div>
                 </section>
-                <section class="section gallery-section py-5" id="gallery">
+                <section
+                    class="section gallery-section py-5"
+                    id="gallery"
+                    aria-labelledby="movement-gallery-title"
+                >
                     <div class="container">
-                        <h2 class="section-title">MOVEMENT GALLERY</h2>
-                        <div class="gallery">
-                            <figure class="gallery-item">
+                        <h2 class="section-title" id="movement-gallery-title">MOVEMENT GALLERY</h2>
+                        <p class="interactive-muted mb-4">
+                            Choose a thumbnail to see the movement and open its technique guide.
+                        </p>
+                        <div class="movement-gallery-layout">
+                            <figure class="movement-display">
                                 <img
+                                    id="gallery-display"
                                     src="images/Barbell-Bench-Press.gif"
-                                    alt="Barbell bench press"
+                                    alt="Barbell bench press movement"
+                                    width="600"
+                                    height="400"
                                     loading="lazy"
                                 />
-                                <figcaption>Bench Press</figcaption>
+                                <figcaption class="p-4">
+                                    <h3 id="gallery-title">Bench Press</h3>
+                                    <p id="gallery-description">
+                                        A barbell pressing movement for the chest and upper body.
+                                    </p>
+                                    <a
+                                        id="gallery-guide"
+                                        class="btn btn-outline-primary btn-sm"
+                                        href="chest.html"
+                                        >Open technique guide</a
+                                    >
+                                </figcaption>
                             </figure>
-                            <figure class="gallery-item">
-                                <img
-                                    src="images/Pull-up.gif"
-                                    alt="Pull-up exercise"
-                                    loading="lazy"
-                                />
-                                <figcaption>Pull-Ups</figcaption>
-                            </figure>
-                            <figure class="gallery-item">
-                                <img
-                                    src="images/Overhead Press.gif"
-                                    alt="Overhead press"
-                                    loading="lazy"
-                                />
-                                <figcaption>Overhead Press</figcaption>
-                            </figure>
-                            <figure class="gallery-item">
-                                <img
-                                    src="images/Barbell Squat.gif"
-                                    alt="Barbell squat"
-                                    loading="lazy"
-                                />
-                                <figcaption>Barbell Squat</figcaption>
-                            </figure>
-                            <figure class="gallery-item">
-                                <img src="images/Leg Press.gif" alt="Leg press" loading="lazy" />
-                                <figcaption>Leg Press</figcaption>
-                            </figure>
-                            <figure class="gallery-item">
-                                <img
-                                    src="images/Romanian Deadlift.gif"
-                                    alt="Romanian deadlift"
-                                    loading="lazy"
-                                />
-                                <figcaption>Romanian Deadlift</figcaption>
-                            </figure>
-                            <figure class="gallery-item">
-                                <img
-                                    src="images/Burpees.gif"
-                                    alt="Burpees exercise"
-                                    loading="lazy"
-                                />
-                                <figcaption>Burpees</figcaption>
-                            </figure>
-                            <figure class="gallery-item">
-                                <img
-                                    src="images/Kettlebell Swing.gif"
-                                    alt="Kettlebell swing"
-                                    loading="lazy"
-                                />
-                                <figcaption>Kettlebell Swing</figcaption>
-                            </figure>
-                            <figure class="gallery-item">
-                                <img
-                                    src="images/Triceps Pushdown.gif"
-                                    alt="Triceps pushdown"
-                                    loading="lazy"
-                                />
-                                <figcaption>Triceps Pushdown</figcaption>
-                            </figure>
+                            <div
+                                id="gallery-thumbnails"
+                                class="gallery-thumbnails"
+                                role="group"
+                                aria-label="Choose an exercise"
+                            ></div>
                         </div>
+                        <p id="gallery-status" class="visually-hidden" role="status"></p>
+                        <noscript
+                            ><p class="interactive-muted">
+                                Enable JavaScript to select gallery thumbnails. Exercise guides
+                                remain available through the navigation.
+                            </p></noscript
+                        >
                     </div>
                 </section>
             </main>
@@ -732,6 +756,14 @@
                             <button
                                 type="button"
                                 class="btn btn-secondary btn-sm"
+                                id="toggle-sound"
+                                aria-pressed="false"
+                            >
+                                Sound: Off
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm"
                                 id="change-background"
                             >
                                 Background: Forest
@@ -741,6 +773,7 @@
                             </button>
                         </div>
                         <span id="background-status" class="visually-hidden" role="status"></span>
+                        <span id="sound-status" class="visually-hidden" role="status"></span>
                     </div>
                     <div class="footer-bottom pt-4">
                         <div class="footer-credits">
@@ -773,93 +806,124 @@
                         Try the sign-up form. This demo checks your details in this browser only. No
                         account is created and no password is saved.
                     </p>
-                    <form id="profile-form" data-validate novalidate>
-                        <div class="mb-3">
-                            <label class="form-label" for="profile-name">Name</label>
-                            <input
-                                class="form-control"
-                                id="profile-name"
-                                name="name"
-                                autocomplete="name"
-                                required
-                                maxlength="80"
-                                data-label="Name"
-                                aria-describedby="profile-name-error"
-                            />
-                            <p class="field-error" id="profile-name-error"></p>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="profile-email">Email</label>
-                            <input
-                                class="form-control"
-                                id="profile-email"
-                                name="email"
-                                type="email"
-                                autocomplete="email"
-                                required
-                                data-label="Email"
-                                aria-describedby="profile-email-error"
-                            />
-                            <p class="field-error" id="profile-email-error"></p>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="profile-password">Password</label>
-                            <input
-                                class="form-control"
-                                id="profile-password"
-                                name="password"
-                                type="password"
-                                autocomplete="new-password"
-                                minlength="8"
-                                required
-                                data-label="Password"
-                                aria-describedby="password-help profile-password-error"
-                            />
-                            <p class="form-help" id="password-help">
-                                Use at least 8 characters. Do not enter a password you use
-                                elsewhere.
+                    <form id="profile-form" data-validate data-multistep method="dialog" novalidate>
+                        <p id="profile-progress" class="profile-progress" role="status">
+                            Step 1 of 3: Your details
+                        </p>
+                        <fieldset data-profile-step="0" class="wizard-step">
+                            <legend tabindex="-1">Your details</legend>
+                            <div class="mb-3">
+                                <label class="form-label" for="profile-name">Name</label>
+                                <input
+                                    class="form-control"
+                                    id="profile-name"
+                                    name="name"
+                                    autocomplete="name"
+                                    required
+                                    maxlength="80"
+                                    data-label="Name"
+                                    aria-describedby="profile-name-error"
+                                />
+                                <p class="field-error" id="profile-name-error"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="profile-email">Email</label>
+                                <input
+                                    class="form-control"
+                                    id="profile-email"
+                                    name="email"
+                                    type="email"
+                                    autocomplete="email"
+                                    required
+                                    data-label="Email"
+                                    aria-describedby="profile-email-error"
+                                />
+                                <p class="field-error" id="profile-email-error"></p>
+                            </div>
+                        </fieldset>
+                        <fieldset data-profile-step="1" class="wizard-step" hidden>
+                            <legend tabindex="-1">Password &amp; updates</legend>
+                            <div class="mb-3">
+                                <label class="form-label" for="profile-password">Password</label>
+                                <input
+                                    class="form-control"
+                                    id="profile-password"
+                                    name="password"
+                                    type="password"
+                                    autocomplete="new-password"
+                                    minlength="8"
+                                    required
+                                    data-label="Password"
+                                    aria-describedby="password-help profile-password-error"
+                                />
+                                <p class="form-help" id="password-help">
+                                    Use at least 8 characters. Do not enter a password you use
+                                    elsewhere.
+                                </p>
+                                <p class="field-error" id="profile-password-error"></p>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="profile-confirm"
+                                    >Confirm password</label
+                                >
+                                <input
+                                    class="form-control"
+                                    id="profile-confirm"
+                                    name="confirmPassword"
+                                    type="password"
+                                    autocomplete="new-password"
+                                    required
+                                    data-label="Password confirmation"
+                                    aria-describedby="profile-confirm-error"
+                                />
+                                <p class="field-error" id="profile-confirm-error"></p>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input
+                                    class="form-check-input"
+                                    id="profile-updates"
+                                    name="updates"
+                                    type="checkbox"
+                                />
+                                <label class="form-check-label" for="profile-updates"
+                                    >Subscribe to training updates</label
+                                >
+                            </div>
+                        </fieldset>
+                        <fieldset data-profile-step="2" class="wizard-step" hidden>
+                            <legend tabindex="-1">Review your details</legend>
+                            <dl id="profile-review" class="profile-review mb-4"></dl>
+                            <p class="form-help mb-4">
+                                Passwords are never displayed here. This is a local demonstration,
+                                not an account registration service.
                             </p>
-                            <p class="field-error" id="profile-password-error"></p>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label" for="profile-confirm">Confirm password</label>
-                            <input
-                                class="form-control"
-                                id="profile-confirm"
-                                name="confirmPassword"
-                                type="password"
-                                autocomplete="new-password"
-                                required
-                                data-label="Password confirmation"
-                                aria-describedby="profile-confirm-error"
-                            />
-                            <p class="field-error" id="profile-confirm-error"></p>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input
-                                class="form-check-input"
-                                id="profile-updates"
-                                name="updates"
-                                type="checkbox"
-                            />
-                            <label class="form-check-label" for="profile-updates"
-                                >Subscribe to training updates</label
-                            >
-                        </div>
+                        </fieldset>
                         <p
                             class="form-status"
                             id="profile-status"
                             role="status"
                             aria-live="polite"
                         ></p>
-                        <button type="submit" class="btn btn-primary w-100">
-                            Check my profile
-                        </button>
+                        <div class="wizard-actions">
+                            <button type="button" class="btn btn-secondary" data-back-step hidden>
+                                Back
+                            </button>
+                            <button type="button" class="btn btn-primary" data-next-step>
+                                Next
+                            </button>
+                            <button type="submit" class="btn btn-primary" hidden>
+                                Check my profile
+                            </button>
+                            <button type="reset" class="btn btn-outline-primary">Reset form</button>
+                        </div>
                     </form>
                 </div>
             </dialog>
             <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+            <audio id="completion-sound" src="audio/success.wav" preload="none"></audio>
+            <script src="js/exercises.js" defer></script>
             <script src="js/main.js" defer></script>
+            <script src="js/advanced.js" defer></script>
         </div>
     </body>
 </html>
